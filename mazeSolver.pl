@@ -66,10 +66,10 @@ press_button(N, X, Y, Id, List) :-
       press_button(Num_left, X, Y, succ(Id), List)
         %else, recurse to all nearby areas
       ; Xup is X+1, Xdown is X-1, Yup is Y+1, Ydown is Y-1,
-        press_button(N, Xup, Y, Id, [[X,Y]|List]),
         press_button(N, Xdown, Y, Id, [[X,Y]|List]),
-        press_button(N, X, Yup, Id, [[X,Y]|List]),
-        press_button(N, X, Ydown, Id, [[X,Y]|List]).
+        press_button(N, Xup, Y, Id, [[X,Y]|List]),
+        press_button(N, X, Ydown, Id, [[X,Y]|List]),
+        press_button(N, X, Yup, Id, [[X,Y]|List]).
 %--------------------------------------------------------------------------------------
 print_coor(X, Y) :-
   write([X,Y]), nl. %TODO print to file, not console
