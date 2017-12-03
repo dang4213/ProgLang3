@@ -68,7 +68,7 @@ main :-
 parse_all_sentences([]).
 %otherwise, send the first sentece to parse_one_sentence
 parse_all_sentences([H|T]) :-
-  ( H = "end_of_file" ->
+  ( H = ["end_of_file"] ->
     abort
   ; %else, continue
   parse_one_sentence(H),
