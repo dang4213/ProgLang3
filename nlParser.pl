@@ -58,18 +58,22 @@ main :-
     retractall(current(_,_)),
     asserta(current(X,Y)),
 
+    %create and/or clear the file
+    open('NL-parse-solution.txt', write, File),
+    close(File),
+
     parse_all_sentences(Words).
 
 %we're done if emtpy
-parse_all_sentences([]) :-
-  write("done!"), nl. %degub print
+parse_all_sentences([]).
 %otherwise, send the first sentece to parse_one_sentence
 parse_all_sentences([H|T]) :-
-  H = "end_of_file" ->
+  ( H = "end_of_file" ->
     abort
   ; %else, continue
   parse_one_sentence(H),
-  parse_all_sentences(T).
+  parse_all_sentences(T)
+  ).
 
 
 %take one sentence (gives a list of words), and determine if
@@ -157,7 +161,10 @@ parse_one_sentence([H|T]) :-
   ).
 
 not_valid_sentence :-
-  write("Not a valid sentence"), nl.
+  open('NL-parse-solution.txt', append, Handle),
+  write(Handle, 'Not a valid sentence\n'),
+  close(Handle).
+%  write("Not a valid sentence"), nl.
 
 %see if einstein is standing on a button. if so, print valid_move
 %and move on, else invalid and stop parsing.
@@ -171,10 +178,16 @@ press_button :-
     invalid_move().
 
 valid_move :-
-  write("Valid move"), nl. %TODO, switch to file
+  open('NL-parse-solution.txt', append, Handle),
+  write(Handle, 'Valid move\n'),
+  close(Handle).
+  %write("Valid move"), nl. %TODO, switch to file
 
 invalid_move :-
-  write("Not a valid move"), nl, %switch to file
+  open('NL-parse-solution.txt', append, Handle),
+  write(Handle, 'Not a valid move\n'),
+  close(Handle),
+  %write("Not a valid move"), nl, %switch to file
   abort.
 
 %move einstien in this direction this number of moves if possible.
