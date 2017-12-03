@@ -3,7 +3,7 @@
 Dan Gay and Elijah Abney
 
 ## Part 1
-  Our part one runs correctly or the given and our own test cases.
+  Our part one runs correctly for the given and our own test cases.
   It uses recursion to find all buttons and press them, only searching
   for the lowest ID button first. After, it will recursively search for the
   exit.
@@ -33,4 +33,4 @@ Dan Gay and Elijah Abney
   With an invalid sentence, the program just moves to the next one. With an invalid
   move, the program aborts, as specified in the hw pdf.
 
-  As things are parsed, output if sent to the output file.
+  As things are parsed, output is sent to the output file.
