@@ -142,12 +142,12 @@ parse_one_sentence([H|T]) :-
        ; %else not valid
          not_valid_sentence().
 
-not_valid_sentence() :-
+not_valid_sentence :-
   write("Not a valid sentence").
 
 %see if einstein is standing on a button. if so, print valid_move
 %and move on, else invalid and stop parsing.
-press_button() :-
+press_button :-
   current(X,Y),
 
   %if there is a button here
@@ -156,10 +156,10 @@ press_button() :-
     ; %else,
     invalid_move().
 
-valid_move() :-
+valid_move :-
   write("Valid move"), nl. %TODO, switch to file
 
-invalid_move() :-
+invalid_move :-
   write("Not a valid move"), nl, %switch to file
   abort.
 
