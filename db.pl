@@ -218,7 +218,18 @@ death(blaine, chloe, gun).
     write_list(Tail).
 
 
-
+% NOTE IF STATEMENTS
+do_thing :-
+  %follow form of:
+  % (if clause) -> (then clause) ; (else clause)
+  5>4 ->
+    write('five is greater than four'), nl
+    ; %else
+    write('whaaat')
+  5<4 ->
+    write("whaaaaaaa")
+    ; %else
+    write('five still greater than four'), nl.
 
 %% STRINGS
   %% name('string', X).     x= [list of ascii values of 'string']
