@@ -60,7 +60,6 @@ press_button(N, X, Y, Id, List, Visited) :-
   info(Xmax, Ymax, _),
   %if out of bounds, or if we've visited here, or if this is a wall, return.
   Id_Plus is Id+1,
-  write(Id_Plus),
   ( (X>=Xmax; X<0; Y>=Ymax; Y<0; member([X,Y], Visited); wall(X,Y); check_buttons(Id_Plus, X, Y)) ->
     write('')
     ;
@@ -79,7 +78,7 @@ press_button(N, X, Y, Id, List, Visited) :-
         press_button(N, X, Yup, Id, [[X,Y]|List], [[X,Y]|Visited])
       )
     ).
-%------------------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------------
 check_buttons(IdP, X, Y) :-
   ( (button(X, Y, IdP) ) ->
     true

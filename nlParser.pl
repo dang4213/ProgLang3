@@ -201,7 +201,7 @@ move_einstein(Direction, Number) :-
     atom_number(Number, N),
     NewY is Y-N,
     %if Y + number is within bounds
-    ( (NewY < MaxY, \+ wall(X, between(NewY, Y))) ->
+    ( (NewY < MaxY, \+ check_walls_Y(X,NewY,Y)) ->
       %valid move
       retractall(current(_,_)),
       asserta(current(X,NewY)),
@@ -217,7 +217,7 @@ move_einstein(Direction, Number) :-
       atom_number(Number, N),
       NewY is Y+N,
       %if Y + number is within bounds
-      ( (NewY >= 0, \+ wall(X, between(Y, NewY))) ->
+      ( (NewY >= 0, \+ check_walls_Y(X,Y,NewY)) ->
         %valid move
         retractall(current(_,_)),
         asserta(current(X,NewY)),
@@ -234,7 +234,7 @@ move_einstein(Direction, Number) :-
         info(MaxX, _, _), %get max y
         NewX is X+N,
         %if Y + number is within bounds
-        ( (NewX < MaxX, \+ wall(X, between(X, NewX))) ->
+        ( (NewX < MaxX, \+ check_walls_X(X,Y,NewX)) ->
           %valid move
           retractall(current(_,_)),
           asserta(current(NewX,Y)),
@@ -250,7 +250,7 @@ move_einstein(Direction, Number) :-
           atom_number(Number, N),
           NewX is X-N,
           %if Y + number is within bounds
-          ( (NewX >= 0, \+ wall(X, between(NewX, X))) ->
+          ( (NewX >= 0, \+ check_walls_X(NewX,Y,X)) ->
             %valid move
             retractall(current(_,_)),
             asserta(current(NewX,Y)),
@@ -265,6 +265,30 @@ move_einstein(Direction, Number) :-
       )
     )
   ).
+
+%--------------------------------------------------------------------------------------
+check_walls_X(X, Y, FinalX) :-
+  ( wall(X, Y) ->
+    true
+  ;
+    ( (X>FinalX) ->
+      false
+    ),
+    NewX is X+1,
+    check_buttons(NewX, Y, FinalX)
+  ).
+%--------------------------------------------------------------------------------------
+check_walls_Y(X, Y, FinalY) :-
+  ( wall(X, Y) ->
+    true
+  ;
+    ( (Y>FinalY) ->
+      false
+    ),
+    NewY is Y+1,
+    check_buttons(X, NewY, FinalY)
+  ).
+%--------------------------------------------------------------------------------------
 
 % Credit to StackOverflow and author Ishq for file parser
 % https://stackoverflow.com/a/4805931
